@@ -32,6 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110 - 1301  USA
 #include "lx200_10micron.h"
 #include "lx200_16.h"
 #include "lx200_OnStep.h"
+#include "lx200_TeenAstro.h"
 #include "lx200ap_experimental.h"
 #include "lx200ap_gtocp2.h"
 #include "lx200ap.h"
@@ -85,6 +86,13 @@ void ISInit()
 
         if (telescope.get() == nullptr)
             telescope.reset(new LX200_OnStep());
+    }
+    if (strstr(me, "indi_lx200_TeenAstro"))
+    {
+        IDLog("initializing from LX200 TeenAstro device...\n");
+
+        if (telescope.get() == nullptr)
+            telescope.reset(new LX200_TeenAstro());
     }
     else if (strstr(me, "indi_lx200gps"))
     {
